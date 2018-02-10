@@ -1,0 +1,13 @@
+{
+	"name": "trazeapp",
+	"version": "1.0",
+	"description": "To keep track of your agents in the field",
+	"engines":{
+		"node": "v6.10.2"
+	},
+	"main": "server.js",
+	"scripts": {
+		"start": "node server.js"
+	},
+	
+}
