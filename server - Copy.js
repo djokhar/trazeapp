@@ -1,34 +1,30 @@
-// Set up
-
-var express = require("express");
-var app = express();
-var mongoose = require("mongoose");
-var logger = require("morgan");
-var bodyParser = require("body-parser");
-var cors = require("cors");
-
-const { body,validationResult } = require('express-validator/check');
-const { sanitizeBody } = require('express-validator/filter');
-
-//Configuration
-mongoose.connect("mongodb://localhost/trazeapp");
-
-app.use(bodyParser.urlencoded({extended: false})); //Parses urlencoded bodies
-app.use(bodyParser.json()); //Send JSON responses
-app.use(logger('dev')); // Log requests to API using morgan
-app.use(cors());
-
- 
-
+//Set up
+let express = require("express");
+let app = express();
+let logger = require("morgan");
+let bodyParser = require("body-parser");
+let cors = require("cors");
 
 let database = require("./database");
 let staffModel = require("./schema");
 
 
+const { body, validationResult } = require('express-validator/check');
+const { sanitizeBody } = require('express-validator/filter');
+const { trim } = require('express-validator').validator;
 
-app.get("/staffs", function(req, res){
-		res.send({"hello" :"Trying to get Users..."});
-});
+app.use(bodyParser.urlencoded({extended: false})); //Parses urlencoded bodies
+app.use(bodyParser.json()); //Send JSON responses
+app.use(cors());
+app.use(logger('dev')); // Log requests to API using morgan
+
+
+
+ 
+// Endpoint for the login function
+const routes = require("./routes");
+app.use("/login", routes);
+
 
 app.listen(8080);
 console.log("Trazeapp Started, listening on port 8080");
